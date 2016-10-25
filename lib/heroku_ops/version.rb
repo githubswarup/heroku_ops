@@ -1,3 +1,3 @@
-module HerokuPipeline
-  VERSION = "0.1.0"
+module HerokuOps
+  VERSION = "0.0.1"
 end

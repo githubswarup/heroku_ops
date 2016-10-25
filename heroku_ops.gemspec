@@ -5,19 +5,19 @@ require 'heroku_ops/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "heroku_ops"
-  spec.version       = HerokuPipeline::VERSION
+  spec.version       = HerokuOps::VERSION
   spec.authors       = ["nrowegt"]
   spec.email         = ["rowe.nathaniel@gmail.com"]
 
-  spec.summary       = "Task to setup pipeline for your app with the typical free tier addons"
-  spec.description   = "Task to setup pipeline for your app with the typical free tier addons"
+  spec.summary       = "Helpful Heroku Ops Rake Tasks"
+  spec.description   = "Tasks to setup pipelines for your app with the typical free tier addons and run deploys and db restores"
   spec.homepage      = "https://github.com/nrowegt/heroku_ops"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
+    spec.metadata['allowed_push_host'] = "https://rubygems.org"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."

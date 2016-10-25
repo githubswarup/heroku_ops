@@ -1,9 +1,9 @@
 def app_name_from_environment(env)
   case env.downcase
   when "production"
-    "#{Rails.application.class.parent_name.parameterize('-')}"
+    "#{Rails.application.class.parent_name.underscore.gsub('_','-')}-production"
   when "staging"
-    "#{Rails.application.class.parent_name.parameterize('-')}-staging"
+    "#{Rails.application.class.parent_name.underscore.gsub('_','-')}-staging"
   end
 end
 
@@ -49,13 +49,13 @@ namespace :heroku_ops do
     task :production do
       ENV['ENV'] = "production"
       sh "git push origin master"
-      Rake::Task[:deploy].invoke
+      Rake::Task["heroku_ops:deploy"].invoke
     end
 
     task :staging do
       ENV['ENV'] = "staging"
       sh "git push origin staging"
-      Rake::Task[:deploy].invoke
+      Rake::Task["heroku_ops:deploy"].invoke
     end
 
     namespace :production do
