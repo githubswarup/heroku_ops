@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in heroku_pipeline_setup.gemspec
+# Specify your gem's dependencies in heroku_ops.gemspec
 gemspec
