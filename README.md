@@ -6,14 +6,22 @@ A (for now) very opinionated gem which has 3 sections:
 * db restore (pull down your heroku database and `psql < tmp/latest.db`)
 * deploys (push to heroku remotes)
 
-These tasks all assume your heroku application names are of the format `"#{Rails.application.class.parent_name.underscore.gsub('_','-')}-#{environment}"`, where environment is one of staging, production. Setting up an app includes the following free Heroku addons:
+These tasks will use the two following environment variables to determine your staging and production app names:
 
-*heroku-postgresql:hobby-dev
-*newrelic:wayne
-*papertrail:choklad
-*rediscloud:30 
-*scheduler:standard
-*sendgrid:starter
+If these variables aren't present, it will default to the following format:
+`"#{Rails.application.class.parent_name.underscore.gsub('_','-')}-#{environment}"`
+
+
+## Addons
+
+Setting up an app includes the following free Heroku addons:
+
+* heroku-postgresql:hobby-dev
+* newrelic:wayne
+* papertrail:choklad
+* rediscloud:30 
+* scheduler:standard
+* sendgrid:starter
 
 App name configuration flags and more detailed documentation will come in a later version.
 
