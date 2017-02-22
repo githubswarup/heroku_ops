@@ -5,9 +5,9 @@ end
 def app_name_from_environment(env)
   case env.downcase
   when "production"
-    ENV['HEROKU_APPNAME_PRODUCTION'] || "#{Rails.application.class.parent_name.underscore.gsub('_','-')}-production"
-  when "staging"
-    ENV['HEROKU_APPNAME_STAGING'] || "#{Rails.application.class.parent_name.underscore.gsub('_','-')}-staging"
+    ENV['HEROKU_APPNAME_PRODUCTION'] || base_app_name
+  else
+    ENV['HEROKU_APPNAME_STAGING'] || "#{base_app_name}-#{env}"
   end
 end
 
@@ -36,7 +36,7 @@ namespace :heroku_ops do
     namespace :setup do
       desc "Setup a staging app (with addons) and remote for heroku"
       task :staging do
-        app_name = app_name_for_env("staging")
+        app_name = app_name_from_environment("staging")
         sh "heroku create #{app_name}"
         sh "git remote remove heroku"        
         create_addons_for_appname(app_name)
@@ -44,7 +44,7 @@ namespace :heroku_ops do
       end
       desc "Setup a production app (with addons) and git remote for heroku"      
       task :production do
-        app_name = app_name_for_env("production")
+        app_name = app_name_from_environment("production")
         sh "heroku create #{app_name}"
         sh "git remote remove heroku"        
         create_addons_for_appname(app_name)
@@ -52,8 +52,8 @@ namespace :heroku_ops do
       end
       desc "Setup a pipeline with your applications in the appropriate stages."
       task :pipeline do
-        sh "heroku pipelines:create -a#{app_name_for_env("staging")} --stage staging"
-        sh "heroku pipelines:add -a#{app_name_for_env("production")} #{base_app_name} --stage production"
+        sh "heroku pipelines:create -a#{app_name_from_environment("staging")} --stage staging"
+        sh "heroku pipelines:add -a#{app_name_from_environment("production")} #{base_app_name} --stage production"
       end
     end
   end

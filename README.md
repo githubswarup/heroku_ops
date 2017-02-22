@@ -63,7 +63,7 @@ rake heroku_ops:pipeline:setup:staging      # Setup a staging app (with addons) 
 ~~~
 
 
-## Other Gems
+## Dependencies
 The `db` and `deploy` tasks rely on the following two gems:
 * https://github.com/ldstudios/heroku_rake_deploy
 * https://github.com/ldstudios/heroku_db_restore
